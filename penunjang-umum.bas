@@ -397,16 +397,4 @@ Function TunjukkanWaktu()
     Waktu = Strings.Format(Now, "dd-MMM-yyyy hh:mm:ss") & "." & Strings.Right(Strings.Format(Timer, "#0.00"), 2)
     TunjukkanWaktu = Waktu: 'Debug.Print Waktu
 End Function
-
-Function PenghilangNilaiGandaTumpuk2(ByRef BarisanBertumpukDua As Variant)
-    For i = 0 To UBound(BarisanBertumpukDua): Data = ""
-        For i1 = 0 To UBound(BarisanBertumpukDua(i))
-            If Data = "" Then Data = BarisanBertumpukDua(i)(i1) Else Data = Data & "|" & BarisanBertumpukDua(i)(i1)
-        Next
-        If Hasil = "" Then
-            Hasil = Data
-        ElseIf InStr(Hasil, Data) = 0 Then Hasil = Hasil & "<Hasil>" & Data
-        End If: 'Debug.Print Hasil
-    Next: Hasil = Split(Hasil, "<Hasil>"): PenghilangNilaiGandaTumpuk2 = Hasil
-End Function                                                                                                                                                  
-                                                                                                                                                    
+                                                               
