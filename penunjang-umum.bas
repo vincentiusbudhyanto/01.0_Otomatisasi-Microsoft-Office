@@ -18,14 +18,14 @@ Function AmbilAngkaAja(ByVal Tulisan As String)
     End If: Next
 End Function
 
-Sub Tunda(ByVal DurasiDetik As Long)
+Function Tunda(ByVal DurasiDetik As Long)
     Sleep DurasiDetik * 1000
-End Sub
+End Function
 
-Sub TungguBentar(ByVal Durasi As Integer)
+Function TungguBentar(ByVal Durasi As Integer)
     Dim BerapaLama As Date: BerapaLama = Now + TimeValue("0:00:" & Durasi)
     While Now < BerapaLama: DoEvents: Wend
-End Sub
+End Function
 
 Function TungguSiap()
     Do Until Application.Ready: DoEvents: Loop
