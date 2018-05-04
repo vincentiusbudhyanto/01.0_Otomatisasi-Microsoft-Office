@@ -1,3 +1,11 @@
+Function AmbilAngkaAja(ByVal Tulisan As String)
+    For i = 1 To Len(Tulisan)
+        If IsNumeric(Mid(Tulisan, i, 1)) Then
+            Hasil = Hasil & Mid(Tulisan, i, 1): Aktif = True
+        ElseIf Len(Hasil) > 0 And Aktif = True Then AmbilAngkaAja = Hasil: Exit Function
+    End If: Next
+End Function
+
 Sub Tunda(ByVal DurasiDetik As Long)
     Sleep DurasiDetik * 1000
 End Sub
