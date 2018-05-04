@@ -1,3 +1,15 @@
+Function PenghilangNilaiGandaTumpuk2(ByRef BarisanBertumpukDua As Variant) 'BarisanBertumpukDua itu jagged array 2 tingkat
+    For i = 0 To UBound(BarisanBertumpukDua): Data = ""
+        For i1 = 0 To UBound(BarisanBertumpukDua(i))
+            If Data = "" Then Data = BarisanBertumpukDua(i)(i1) Else Data = Data & "|" & BarisanBertumpukDua(i)(i1)
+        Next
+        If Hasil = "" Then
+            Hasil = Data
+        ElseIf InStr(Hasil, Data) = 0 Then Hasil = Hasil & "<Hasil>" & Data
+        End If: 'Debug.Print Hasil
+    Next: Hasil = Split(Hasil, "<Hasil>"): PenghilangNilaiGandaTumpuk2 = Hasil
+End Function
+
 Function AmbilAngkaAja(ByVal Tulisan As String)
     For i = 1 To Len(Tulisan)
         If IsNumeric(Mid(Tulisan, i, 1)) Then
