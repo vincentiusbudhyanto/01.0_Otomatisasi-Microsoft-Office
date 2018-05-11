@@ -1,3 +1,7 @@
+Function SalinLembarAktif(ByVal BukuAsal As String, ByVal BukuSalin As String)
+    Windows(BukuAsal).Activate: ActiveSheet.Copy Before:=Workbooks(BukuSalin).Sheets(1)
+End Function
+
 Function MatikanSeluruhRumus(ByVal NamaBukuKerja As String, ByVal NamaLembar As String)
     Workbooks(NamaBukuKerja).Activate
     If Sheets(NamaLembar).Visible = 0 Or Sheets(NamaLembar).Visible = 2 Then Exit Function
