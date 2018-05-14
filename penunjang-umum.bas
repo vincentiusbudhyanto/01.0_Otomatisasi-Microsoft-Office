@@ -1,6 +1,6 @@
 Function BalikinGalat()
     Err.Clear: On Error GoTo 0
-End function
+End Function
     
 Function PenghilangNilaiGandaTumpuk2(ByRef BarisanBertumpukDua As Variant) 'BarisanBertumpukDua itu jagged array 2 tingkat
     For i = 0 To UBound(BarisanBertumpukDua): Data = ""
