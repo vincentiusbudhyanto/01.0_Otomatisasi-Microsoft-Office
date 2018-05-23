@@ -1,3 +1,12 @@
+Function HapusLembar(ByVal NamaLembar As String, ByVal NamaBuku As String)
+'Menghapus setiap lembar dengan nama yang sama seperti NamaLembar pada buku yang ditunjuk.
+    For Each Sheet In Workbooks(NamaBuku).Sheets
+        If Sheet.Name = NamaLembar Then
+            Application.DisplayAlerts = False: Sheet.Delete: Application.DisplayAlerts = True
+        End If
+    Next Sheet
+End Function
+
 Function SalinLembarAktif(ByVal BukuAsal As String, ByVal BukuSalin As String)
     Windows(BukuAsal).Activate: ActiveSheet.Copy Before:=Workbooks(BukuSalin).Sheets(1)
 End Function
