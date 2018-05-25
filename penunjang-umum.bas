@@ -1,3 +1,9 @@
+Function ApakahSudahDiKinikan(ByVal LokasiBarang As String, ByVal NamaBarang As String, ByVal DurasiHari As Double) As Boolean
+    Set Sistem = New FileSystemObject: Set Barang = Sistem.GetFile(LokasiBarang & "\" & NamaBarang)
+    If (Now - Barang.DateLastModified) < DurasiHari Then ApakahSudahDiKinikan = True Else ApakahSudahDiKinikan = False
+    Set Sistem = Nothing: Set Barang = Nothing
+End Function
+
 Function BalikinGalat()
     Err.Clear: On Error GoTo 0
 End Function
