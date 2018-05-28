@@ -53,12 +53,12 @@ Function Simpan(ByVal LokasiSimpan As String, ByVal NamaBuku As String, ByVal Sa
     Application.DisplayAlerts = True
 End Function
 
-Function Buka(ByVal LokasiBuku As String, ByVal NamaBuku As String)
+Function Buka(ByVal LokasiBuku As String, ByVal NamaBuku As String, Optional ByVal Sandi as String)
     If InStr(NamaBuku, ".xls") = 0 Then Exit Function
     On Error GoTo Keluar
     For Each Workbook In Workbooks
         Application.DisplayAlerts = False: If Workbook.Name = NamaBuku Then Workbook.Close: Application.DisplayAlerts = True
-    Next: Workbooks.Open LokasiBuku & "\" & NamaBuku, UpdateLinks:=0
+    Next: Workbooks.Open LokasiBuku & "\" & NamaBuku, UpdateLinks:=0, Password:= Sandi
 Keluar:
 End Function
 
