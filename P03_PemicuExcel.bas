@@ -1,4 +1,3 @@
-
 Function PemicuWaktuPasti(ByVal Mode As String, ByVal KondisiWaktu As String, ByVal KapanMulai As String, _
     ByVal ProsedurApa As String, ByVal KataKunci As String)
 
