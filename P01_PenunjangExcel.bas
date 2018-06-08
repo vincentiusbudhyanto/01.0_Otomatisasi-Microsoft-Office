@@ -1,3 +1,19 @@
+Sub HitungMundur(ByVal DurasiDetik As Integer, Optional ByVal NamaProses As String)
+'Sub ini ditujukan untuk menghitung mundur dan menuliskannya pada statusbar Excel.
+    NamaProses = NamaProses & " ": i = DurasiDetik: TungguBentar 0.5
+    Do Until i = 0
+        StatusExcel "Proses " & NamaProses & "akan dimulai pada " & i
+        TungguBentar 1: i = i - 1
+    Loop
+    StatusExcel "Proses " & NamaProses & "akan dimulai pada " & 0: TungguBentar 1
+    Application.StatusBar = ""
+End Sub
+
+Function StatusExcel(ByVal Pesan As String)
+'Fungsi ini bertujuan untuk menulis pada statusbar Excel
+    Application.DisplayStatusBar = True: Application.StatusBar = Pesan
+End Function
+
 Function HapusLembar(ByVal NamaLembar As String, ByVal NamaBuku As String)
 'Menghapus setiap lembar dengan nama yang sama seperti NamaLembar pada buku yang ditunjuk.
     For Each Sheet In Workbooks(NamaBuku).Sheets
@@ -35,7 +51,7 @@ End Sub
 Sub SiapkanPenyaruBuku()
     ActiveWorkbook.SetPasswordEncryptionOptions _
     PasswordEncryptionProvider:="Microsoft RSA SChannel Cryptographic Provider", PasswordEncryptionAlgorithm:="RC4", _
-    PasswordEncryptionKeyLength:=2048, PasswordEncryptionFileProperties:=True
+    PasswordEncryptionKeyLength:=4096, PasswordEncryptionFileProperties:=True
 End Sub
 
 Function TutupBuku(ByVal NamaBuku As String)
