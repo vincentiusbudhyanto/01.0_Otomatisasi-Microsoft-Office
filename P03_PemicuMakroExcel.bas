@@ -135,7 +135,7 @@ Private Function PemicuSurel(ByVal NamaAkun As String, ByVal Pengirim As String,
 
     End Function
 
-    Function PemicuWaktuKadaluarsa(ByVal NamLokDokumen As String, ByVal BatasWaktu As Integer)
+Function PemicuWaktuKadaluarsa(ByVal NamLokDokumen As String, ByVal BatasWaktu As Integer)
 
     Dim Sistem As Object
     Dim Dokumen As Object
