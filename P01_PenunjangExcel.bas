@@ -38,7 +38,7 @@ Function Bicara(ByVal ApaYangMauDikatakan As String)
     Application.Speech.Speak ApaYangMauDikatakan
 End Function
 
-Sub PeriksaEnkripsi()
+Function PeriksaEnkripsi()
     Dim BukuIni As Workbook: Set BukuIni = ActiveWorkbook
     With BukuIni
         Debug.Print .PasswordEncryptionAlgorithm: Debug.Print .PasswordEncryptionFileProperties
@@ -46,7 +46,7 @@ Sub PeriksaEnkripsi()
     End With
 End Sub
 
-Sub SiapkanPenyaruBuku()
+Function SiapkanPenyaruBuku()
     ActiveWorkbook.SetPasswordEncryptionOptions _
     PasswordEncryptionProvider:="Microsoft RSA SChannel Cryptographic Provider", PasswordEncryptionAlgorithm:="RC4", _
     PasswordEncryptionKeyLength:=4096, PasswordEncryptionFileProperties:=True
