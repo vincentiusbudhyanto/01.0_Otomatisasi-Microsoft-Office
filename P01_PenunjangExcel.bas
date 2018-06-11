@@ -1,4 +1,4 @@
-Sub HitungMundur(ByVal DurasiDetik As Integer, Optional ByVal NamaProses As String)
+Function HitungMundur(ByVal DurasiDetik As Integer, Optional ByVal NamaProses As String)
 'Sub ini ditujukan untuk menghitung mundur dan menuliskannya pada statusbar Excel.
     NamaProses = NamaProses & " ": i = DurasiDetik: TungguBentar 0.5
     Do Until i = 0: StatusExcel "Proses " & NamaProses & "akan dimulai pada " & i
