@@ -5,7 +5,7 @@ Function HitungMundur(ByVal DurasiDetik As Integer, Optional ByVal NamaProses As
         TungguBentar 1: i = i - 1: Loop
     StatusExcel "Proses " & NamaProses & "akan dimulai pada " & 0: TungguBentar 1
     Application.StatusBar = ""
-End Sub
+End Function 
 
 Function StatusExcel(ByVal Pesan As String)
 'Fungsi ini bertujuan untuk menulis pada statusbar Excel
@@ -44,13 +44,13 @@ Function PeriksaEnkripsi()
         Debug.Print .PasswordEncryptionAlgorithm: Debug.Print .PasswordEncryptionFileProperties
         Debug.Print .PasswordEncryptionKeyLength: Debug.Print .PasswordEncryptionProvider
     End With
-End Sub
+End Function 
 
 Function SiapkanPenyaruBuku()
     ActiveWorkbook.SetPasswordEncryptionOptions _
     PasswordEncryptionProvider:="Microsoft RSA SChannel Cryptographic Provider", PasswordEncryptionAlgorithm:="RC4", _
     PasswordEncryptionKeyLength:=4096, PasswordEncryptionFileProperties:=True
-End Sub
+End Function 
 
 Function TutupBuku(ByVal NamaBuku As String)
     If NamaBuku = "" Then Exit Function
