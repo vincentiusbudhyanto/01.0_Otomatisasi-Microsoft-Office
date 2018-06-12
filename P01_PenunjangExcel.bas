@@ -1,4 +1,5 @@
 Function SalinIsiLembarAktifKeBukuBaru()
+'Fungsi ini bertujuan untuk menyalin isi seluruh sel (value-only) ke buku/excel baru.
     LembarBukuAktif = ActiveWorkbook.Name
     Workbooks.Add: TungguSiap: NamaBukuBaru = ActiveWorkbook.Name
     Windows(LembarBukuAktif).Activate: Cells.Select: Selection.Copy: TungguSiap
@@ -9,7 +10,7 @@ Function SalinIsiLembarAktifKeBukuBaru()
 End Function
 
 Function HitungMundur(ByVal DurasiDetik As Integer, Optional ByVal NamaProses As String)
-'Sub ini ditujukan untuk menghitung mundur dan menuliskannya pada statusbar Excel.
+'Fungsi ini ditujukan untuk menghitung mundur dan menuliskannya pada statusbar Excel.
     NamaProses = NamaProses & " ": i = DurasiDetik: TungguBentar 0.5
     Do Until i = 0: StatusExcel "Proses " & NamaProses & "akan dimulai pada " & i
         TungguBentar 1: i = i - 1: Loop
