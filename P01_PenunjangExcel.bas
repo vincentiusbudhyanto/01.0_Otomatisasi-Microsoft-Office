@@ -1,5 +1,6 @@
 Function SalinIsiLembarAktifKeBukuBaru()
 'Fungsi ini bertujuan untuk menyalin isi seluruh sel (value-only) ke buku/excel baru.
+'Fungsi akan mengembalikan nama buku yang baru terbentuk dalam bentuk string.
     LembarBukuAktif = ActiveWorkbook.Name
     Workbooks.Add: TungguSiap: NamaBukuBaru = ActiveWorkbook.Name
     Windows(LembarBukuAktif).Activate: Cells.Select: Selection.Copy: TungguSiap
