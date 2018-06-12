@@ -7,7 +7,7 @@ Function SalinIsiLembarAktifKeBukuBaru()
     Windows(NamaBukuBaru).Activate
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
         :=False, Transpose:=False: TungguSiap
-    SalinLembarKeBukuBaru = NamaBukuBaru
+    SalinIsiLembarAktifKeBukuBaru = NamaBukuBaru
 End Function
 
 Function HitungMundur(ByVal DurasiDetik As Integer, Optional ByVal NamaProses As String)
