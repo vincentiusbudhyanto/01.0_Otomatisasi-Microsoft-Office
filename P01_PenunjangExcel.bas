@@ -1,3 +1,13 @@
+Function SalinIsiLembarAktifKeBukuBaru()
+    LembarBukuAktif = ActiveWorkbook.Name
+    Workbooks.Add: TungguSiap: NamaBukuBaru = ActiveWorkbook.Name
+    Windows(LembarBukuAktif).Activate: Cells.Select: Selection.Copy: TungguSiap
+    Windows(NamaBukuBaru).Activate
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False: TungguSiap
+    SalinLembarKeBukuBaru = NamaBukuBaru
+End Function
+
 Function HitungMundur(ByVal DurasiDetik As Integer, Optional ByVal NamaProses As String)
 'Sub ini ditujukan untuk menghitung mundur dan menuliskannya pada statusbar Excel.
     NamaProses = NamaProses & " ": i = DurasiDetik: TungguBentar 0.5
