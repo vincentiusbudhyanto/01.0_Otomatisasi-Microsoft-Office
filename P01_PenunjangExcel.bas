@@ -1,3 +1,18 @@
+Function TarikKePojokKiriAtas(ByVal KataKunci As String)
+'Fungsi ini bertujuan untuk menarik lokasi kata kunci dan seluruh sisanya ke kiri atas.
+    If CariKata(KataKunci) Then
+        BarisAtas = ActiveCell.Row: KolomKiri = ActiveCell.Column
+        Do Until KolomKiri = 1
+            Columns(1).Delete
+            CariKata KataKunci: BarisAtas = ActiveCell.Row: KolomKiri = ActiveCell.Column
+        Loop
+        Do Until BarisAtas = 1
+            Rows(1).Delete
+            CariKata KataKunci: BarisAtas = ActiveCell.Row: KolomKiri = ActiveCell.Column
+        Loop
+    End If
+End Function
+
 Function SalinIsiLembarAktifKeBukuBaru()
 'Fungsi ini bertujuan untuk menyalin isi seluruh sel (value-only) ke buku/excel baru.
 'Fungsi akan mengembalikan nama buku yang baru terbentuk dalam bentuk string.
