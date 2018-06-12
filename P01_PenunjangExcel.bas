@@ -1,6 +1,7 @@
 Function TarikKePojokKiriAtas(ByVal KataKunci As String)
 'Fungsi ini bertujuan untuk menarik lokasi kata kunci dan seluruh sisanya ke kiri atas.
     If CariKata(KataKunci) Then
+        Application.ScreenUpdating = False
         BarisAtas = ActiveCell.Row: KolomKiri = ActiveCell.Column
         Do Until KolomKiri = 1
             Columns(1).Delete
@@ -10,6 +11,7 @@ Function TarikKePojokKiriAtas(ByVal KataKunci As String)
             Rows(1).Delete
             CariKata KataKunci: BarisAtas = ActiveCell.Row: KolomKiri = ActiveCell.Column
         Loop
+        Application.ScreenUpdating = True
     End If
 End Function
 
