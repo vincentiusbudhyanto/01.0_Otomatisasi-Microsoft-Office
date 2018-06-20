@@ -15,9 +15,9 @@ Private Function KirimSurelTeks(ByVal Tujuan As String, ByVal Judul As String, B
         If NamaLokasiLampiran = "" Then
         Else: .Attachments.Add NamaLokasiLampiran
         End If
-        If Mode = False Then
+        If LangsungKirim = False Then
             .Display
-        ElseIf Mode = True Then
+        ElseIf LangsungKirim = True Then
             .Send
         End If
     End With
