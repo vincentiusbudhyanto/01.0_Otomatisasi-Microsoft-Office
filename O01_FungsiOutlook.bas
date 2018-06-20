@@ -3,7 +3,7 @@ Private Sub ContohPenggunaanKirimSurelTeks()
     KirimSurelTeks "vincentius.budhyanto@generali.co.id", "Test", "test", False
 End Sub
 
-Private Function KirimSurelTeks(ByVal Tujuan As String, ByVal Judul As String, ByVal IsiSurel As String, ByVal LangsungKirim As Boolean, _
+Function KirimSurelTeks(ByVal Tujuan As String, ByVal Judul As String, ByVal IsiSurel As String, ByVal LangsungKirim As Boolean, _
     Optional ByVal NamaLokasiLampiran As String, Optional ByVal Tembusan As String, Optional ByVal TembusanTersembunyi As String)
 
     Set ProOutlook = CreateObject("Outlook.Application"): ProOutlook.Session.Logon
