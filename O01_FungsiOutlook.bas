@@ -1,4 +1,4 @@
-Private Sub InsiasiModul()
+Private Sub InsiasiModulOutlook()
     PasangReferensi
 End Sub
 '-------------------------------------------------------------------------------------------------------------
