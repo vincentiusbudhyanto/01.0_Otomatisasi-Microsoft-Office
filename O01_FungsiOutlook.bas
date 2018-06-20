@@ -1,4 +1,5 @@
 Private Sub ContohPenggunaanKirimSurelTeks()
+    PasangReferensi
     KirimSurelTeks "vincentius.budhyanto@generali.co.id", "Test", "test", False
 End Sub
 
