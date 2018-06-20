@@ -5,7 +5,7 @@ Silahkan gunakan fungsi-fungsi ini secara bebas dalam konteks lisensi GNU GENERA
 
 Untuk menggunakan kode-kode pada repo ini, aktifkan Tab Developer dan buat modul baru untuk masing-masing dokumen, kemudian salin seluruh baris ke dalam masing-masing dokumen tersebut.
 
-Berikut ini adalah referensi video yang sangat saya rekomendasikan jika Anda masih mulai mempelajari VBA:
+Berikut ini adalah referensi video yang sangat saya rekomendasikan jika Anda baru mulai mempelajari VBA:
 
 1. Excel VBA Introduction: https://www.youtube.com/playlist?list=PLNIs-AWhQzckr8Dgmgb3akx_gFMnpxTN5
 2. VBA crash course with wise owl: https://www.youtube.com/playlist?list=PLlnRZGIp4JUHNbPnB5MFsibNiyUQQGgPU
