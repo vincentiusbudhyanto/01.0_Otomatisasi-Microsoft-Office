@@ -37,10 +37,10 @@ End Function
 '-------------------------------------------------------------------------------------------------------------
         
 Private Sub Contoh_TambahBerkasOutlook()
-    Outlook_TambahBerkas "Sapi":Outlook_TambahBerkas "Kodok", "Sapi"
+    Outlook_TambahBerkas "Sapi": Outlook_TambahBerkas "Sapi/Kodok": Outlook_TambahBerkas "Sapi/Kodok/Kambing"
 End Sub
 
-Function Outlook_TambahBerkas(ByVal NamaBerkasBaru As String, Optional ByVal BuatDalamBerkas As String)
+Function Outlook_TambahBerkas(ByVal NamaBerkasBaru As String)
 On Error GoTo Galat
     
     Set AplOutlook = CreateObject("Outlook.Application"): AplOutlook.Session.Logon
@@ -49,22 +49,28 @@ On Error GoTo Galat
     Set SurelSurel = Penyimpanan.GetDefaultFolder(olFolderInbox).Items
     Set KotakKotakMasuk = Penyimpanan.GetDefaultFolder(olFolderInbox).Folders
     
-    If BuatDalamBerkas <> "" Then GoTo Alur1
+    If InStr(NamaBerkasBaru, "/") > 0 Then GoTo Alur1
     KotakMasukUtama.Folders.Add NamaBerkasBaru
   
-    Debug.Print "BERHASIL MENAMBAH BERKAS DALAM: " & NamaBerkasBaru
+    Debug.Print "BERHASIL MENAMBAH BERKAS: " & NamaBerkasBaru
 Exit Function
     
 Alur1:
-    Set BerkasDalam = KotakMasukUtama.Folders(BuatDalamBerkas).Folders
-    BerkasDalam.Add NamaBerkasBaru
+    BerkasBerkas = Split(NamaBerkasBaru, "/")
+    Set KotakMasuk = KotakMasukUtama
     
-    Debug.Print "BERHASIL MENAMBAH BERKAS DALAM: " & NamaBerkasBaru & "_" & BuatDalamBerkas
+    For i = 0 To UBound(BerkasBerkas) - 1
+        Set KotakMasuk = KotakMasuk.Folders(BerkasBerkas(i))
+    Next
+    
+    Set BerkasDalam = KotakMasuk.Folders
+    BerkasDalam.Add BerkasBerkas(UBound(BerkasBerkas))
+    Debug.Print "BERHASIL MENAMBAH BERKAS DALAM: " & NamaBerkasBaru
 Exit Function
 
 Galat:
 
-    Debug.Print "GALAT FUNGSI: Outlook_TambahBerkas"
+    Debug.Print "GALAT FUNGSI: Outlook_TambahBerkas_" & NamaBerkasBaru
 Exit Function
 
 End Function
