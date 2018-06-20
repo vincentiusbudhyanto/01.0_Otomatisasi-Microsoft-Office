@@ -3,10 +3,9 @@
 
 '------------------
 Sub PasangReferensi()
-    'Call PasangRefScripting: PasangRefOutlook
+    Call PasangRefScripting: PasangRefOutlook
 End Sub
 '------------------
-
 
 Private Sub PasangRefScripting()
     LokasiSistem = AmbilLokasiSistem: If Not AdakahRef("Scripting", "Nama") Then TambahRef LokasiSistem & "\scrrun.dll"
