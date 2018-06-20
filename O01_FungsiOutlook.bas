@@ -41,7 +41,7 @@ Private Sub Contoh_TambahBerkasOutlook()
 End Sub
 
 Function Outlook_TambahBerkas(ByVal NamaBerkasBaru As String)
-On Error GoTo Galat
+    On Error GoTo Galat
     
     Set AplOutlook = CreateObject("Outlook.Application"): AplOutlook.Session.Logon
     Set Penyimpanan = AplOutlook.GetNamespace("MAPI")
