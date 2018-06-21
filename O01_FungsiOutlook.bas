@@ -2,9 +2,10 @@ Private Sub InsiasiModulOutlook()
     PasangReferensi
 End Sub
 '-------------------------------------------------------------------------------------------------------------
+
 Private Sub Contoh_CariSurelInboxOutlook()
    
-    Cari = Outlook_CariSurelInbox("MOM", "judul", , "vincentius.budhyanto@generali.co.id", "01.1 Operation/1 Claim Group")
+    Cari = Outlook_CariSurelInbox("MOM", "judul", , "vincentius.budhyanto@generali.co.id", "")
     
     Set AplOutlook = CreateObject("Outlook.Application"): AplOutlook.Session.Logon
     Set Penyimpanan = AplOutlook.GetNamespace("MAPI")
@@ -39,19 +40,12 @@ Function Outlook_CariSurelInbox(ByVal KataKunci As String, ByVal CariDi_Bagian A
         If LokasiBerkas <> "" Then Set KotakMasuk = KotakMasuk.SubFolders(LokasiBerkas)
     End If
     
+    Saringan = Array(KataKunci, CariDi_Bagian, Atribut_Bagian)
+    
     For Each MailItem In KotakMasuk.Items
-        If InStr(UCase(CariDi_Bagian), "JUDUL") > 0 And InStr(MailItem.Subject, KataKunci) > 0 Then
-            If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
-        ElseIf InStr(UCase(CariDi_Bagian), "ISI") > 0 And InStr(MailItem.Body, KataKunci) > 0 Then
-            If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
-        ElseIf InStr(UCase(CariDi_Bagian), "PENGIRIM") > 0 And InStr(MailItem.SenderEmailAddress, KataKunci) > 0 Then
-            If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
-        ElseIf InStr(UCase(CariDi_Bagian), "TEMBUSAN") > 0 And InStr(MailItem.CC, KataKunci) > 0 Then
-            If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
-        ElseIf InStr(UCase(CariDi_Bagian), "TUJUAN") > 0 And InStr(MailItem.To, KataKunci) > 0 Then
-            If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
-        End If
-    Next: Debug.Print Hasil
+        Periksa = Outlook_PenapisSurel(MailItem, Saringan)
+        If Hasil = "" Then Hasil = Periksa Else Hasil = Hasil & "<PembatasSurel>" & Periksa
+    Next: Periksa = Hasil: Debug.Print Hasil
     Outlook_CariSurelInbox = Hasil
     
     Exit Function
@@ -59,6 +53,20 @@ Function Outlook_CariSurelInbox(ByVal KataKunci As String, ByVal CariDi_Bagian A
 Galat:
     Debug.Print "GALAT FUNGSI: Outlook_CariSurel"
     Exit Function
+End Function
+
+Private Function Outlook_PenapisSurel(ByRef Surel As Variant, ByRef Saringan)
+    
+    If InStr(UCase(Saringan(1)), "JUDUL") > 0 And InStr(Surel.Subject, Saringan(0)) > 0 Then
+        Hasil = Surel.EntryID
+    ElseIf InStr(UCase(Saringan(1)), "ISI") > 0 And InStr(Surel.Body, Saringan(0)) > 0 Then Hasil = Surel.EntryID
+    ElseIf InStr(UCase(Saringan(1)), "PENGIRIM") > 0 And InStr(Surel.Sender, Saringan(0)) > 0 Then Hasil = Surel.EntryID
+    ElseIf InStr(UCase(Saringan(1)), "TEMBUSAN") > 0 And InStr(Surel.CC, Saringan(0)) > 0 Then Hasil = Surel.EntryID
+    ElseIf InStr(UCase(Saringan(1)), "TUJUAN") > 0 And InStr(Surel.To, Saringan(0)) > 0 Then Hasil = Surel.EntryID
+    End If
+    
+    Outlook_PenapisSurel = Hasil
+    
 End Function
 '-------------------------------------------------------------------------------------------------------------
 Private Sub Contoh_SalinBerkasOutlookX()
