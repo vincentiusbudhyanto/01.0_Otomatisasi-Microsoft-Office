@@ -3,7 +3,23 @@ Private Sub InsiasiModulOutlook()
 End Sub
 '-------------------------------------------------------------------------------------------------------------
 Private Sub Contoh_CariSurelInboxOutlook()
-   Outlook_CariSurelInbox "Sosialisasi", "judul", , "Arsip Email_Vincent", "01.1 Operation/1 Claim Group"
+   
+    Cari = Outlook_CariSurelInbox("MOM", "judul", , "vincentius.budhyanto@generali.co.id", "01.1 Operation/1 Claim Group")
+    
+    Set AplOutlook = CreateObject("Outlook.Application"): AplOutlook.Session.Logon
+    Set Penyimpanan = AplOutlook.GetNamespace("MAPI")
+    
+    If InStr(Cari, "<PembatasSurel>") = 0 Then
+        Set Surel = Penyimpanan.GetItemFromID(Cari)
+        Surel.Display
+    Else
+        Cari = Split(Cari, "<PembatasSurel>")
+        For i = 0 To UBound(Cari)
+            Set Surel = Penyimpanan.GetItemFromID(Cari)
+            Surel.Display
+        Next
+    End If
+        
 End Sub
  
 Function Outlook_CariSurelInbox(ByVal KataKunci As String, ByVal CariDi_Bagian As String, Optional ByVal Atribut_Bagian, _
@@ -32,10 +48,11 @@ Function Outlook_CariSurelInbox(ByVal KataKunci As String, ByVal CariDi_Bagian A
             If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
         ElseIf InStr(UCase(CariDi_Bagian), "TEMBUSAN") > 0 And InStr(MailItem.CC, KataKunci) > 0 Then
             If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
-        ElseIf InStr(UCase(CariDi_Bagian), "TUJUAN") > 0 And InStr(MailItem.Recipients, KataKunci) > 0 Then
+        ElseIf InStr(UCase(CariDi_Bagian), "TUJUAN") > 0 And InStr(MailItem.To, KataKunci) > 0 Then
             If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
         End If
     Next: Debug.Print Hasil
+    Outlook_CariSurelInbox = Hasil
     
     Exit Function
     
