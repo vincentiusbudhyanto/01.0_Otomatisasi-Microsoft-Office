@@ -2,6 +2,48 @@ Private Sub InsiasiModulOutlook()
     PasangReferensi
 End Sub
 '-------------------------------------------------------------------------------------------------------------
+Private Sub Contoh_CariSurelInboxOutlook()
+   Outlook_CariSurelInbox "Sosialisasi", "judul", , "Arsip Email_Vincent", "01.1 Operation/1 Claim Group"
+End Sub
+ 
+Function Outlook_CariSurelInbox(ByVal KataKunci As String, ByVal CariDi_Bagian As String, Optional ByVal Atribut_Bagian, _
+    Optional ByVal NamaAkunAtauDokumenOST As String, Optional ByVal LokasiBerkas)
+    'On Error GoTo Galat
+   
+    Set AplOutlook = CreateObject("Outlook.Application"): AplOutlook.Session.Logon
+    Set AkunAkun = AplOutlook.GetNamespace("MAPI").Stores
+    Set KotakMasuk = AkunAkun.Item(NamaAkunAtauDokumenOST).GetDefaultFolder(olFolderInbox)
+    
+    If InStr(LokasiBerkas, "/") > 0 Then
+        LokasiBerkas = Split(LokasiBerkas, "/")
+        For i = 0 To UBound(LokasiBerkas)
+            Set KotakMasuk = KotakMasuk.Folders(LokasiBerkas(i))
+        Next
+    Else
+        If LokasiBerkas <> "" Then Set KotakMasuk = KotakMasuk.SubFolders(LokasiBerkas)
+    End If
+    
+    For Each MailItem In KotakMasuk.Items
+        If InStr(UCase(CariDi_Bagian), "JUDUL") > 0 And InStr(MailItem.Subject, KataKunci) > 0 Then
+            If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
+        ElseIf InStr(UCase(CariDi_Bagian), "ISI") > 0 And InStr(MailItem.Body, KataKunci) > 0 Then
+            If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
+        ElseIf InStr(UCase(CariDi_Bagian), "PENGIRIM") > 0 And InStr(MailItem.SenderEmailAddress, KataKunci) > 0 Then
+            If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
+        ElseIf InStr(UCase(CariDi_Bagian), "TEMBUSAN") > 0 And InStr(MailItem.CC, KataKunci) > 0 Then
+            If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
+        ElseIf InStr(UCase(CariDi_Bagian), "TUJUAN") > 0 And InStr(MailItem.Recipients, KataKunci) > 0 Then
+            If Hasil = "" Then Hasil = MailItem.EntryID Else Hasil = Hasil & "<PembatasSurel>" & MailItem.EntryID
+        End If
+    Next: Debug.Print Hasil
+    
+    Exit Function
+    
+Galat:
+    Debug.Print "GALAT FUNGSI: Outlook_CariSurel"
+    Exit Function
+End Function
+'-------------------------------------------------------------------------------------------------------------
 Private Sub Contoh_SalinBerkasOutlookX()
     OutlookX_SalinBerkas "Arsip Email_Vincent", "Vincentius.Budhyanto@generali.co.id", "Deleted Items"
 End Sub
