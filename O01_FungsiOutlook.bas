@@ -2,7 +2,6 @@ Private Sub InsiasiModulOutlook()
     PasangReferensi
 End Sub
 '-------------------------------------------------------------------------------------------------------------
-
 Private Sub Contoh_SalinBerkasOutlookX()
     OutlookX_SalinBerkas "Arsip Email_Vincent", "Vincentius.Budhyanto@generali.co.id", "Deleted Items"
 End Sub
@@ -16,7 +15,6 @@ Function OutlookX_SalinBerkas(ByVal BerkasSumber As String, ByVal BerkasTujuan A
     Next
 
 End Function
-
 '-------------------------------------------------------------------------------------------------------------
 Private Sub Contoh_KirimSurelTeksOutlookX()
     OutlookX_KirimSurelTeks "vincentius.budhyanto@generali.co.id", "Test", "Test", False
@@ -57,7 +55,6 @@ Galat:
     Exit Function
 End Function
 '-------------------------------------------------------------------------------------------------------------
-        
 Private Sub Contoh_TambahBerkasOutlookX()
     OutlookX_TambahBerkas "Inbox/Sapi", "vincentius.budhyanto@generali.co.id"
     OutlookX_TambahBerkas "Inbox/Sapi/Kodok", "Vincentius.Budhyanto@generali.co.id"
@@ -96,7 +93,6 @@ Exit Function
 
 End Function
 '-------------------------------------------------------------------------------------------------------------
-
 Private Sub Contoh_PeriksaBerkasOutlookX()
     DaftarBerkasSurel = OutlookX_BuatDaftarBerkas("Arsip Email_Vincent", "Inbox")
 End Sub
