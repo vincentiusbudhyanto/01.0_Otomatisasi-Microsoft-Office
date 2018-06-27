@@ -1,3 +1,5 @@
+Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+
 Function ApakahSudahDiKinikan(ByVal NamLokBarang As String, ByVal DurasiHari As Double) As Boolean
     Set Sistem = New FileSystemObject: Set Barang = Sistem.GetFile(NamLokBarang)
     If (Now - Barang.DateLastModified) < DurasiHari Then ApakahSudahDiKinikan = True Else ApakahSudahDiKinikan = False
