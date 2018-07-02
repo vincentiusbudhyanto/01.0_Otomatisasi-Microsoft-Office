@@ -1,11 +1,11 @@
-Function Pilih_Buku(ByVal LokasiBerkas As String)
-    'Fungsi ini agar pengguna dapat membuka buku excel yang ada dalam lokasi berkas 
-    
+Function Pilih_Buku(Optional ByVal LokasiBerkas As String)
+    'Fungsi ini agar pengguna dapat membuka buku excel yang ada dalam lokasi berkas
+    If LokasiBerkas = "" Then LokasiBerkas = ThisWorkbook.Path
     Dim BukuYangDibuka As String: ChDir LokasiBerkas
     BukuYangDibuka = Application.GetOpenFilename(Title:="Pilih nama buku yang ingin dibuka", _
     FileFilter:="Excel Files .xls (.xls),")
     
-    If BukuYangDibuka = False Then
+    If BukuYangDibuka = "False" Then
         MsgBox "Tidak ada buku yang dibuka.", vbExclamation, "Tidak ada!": Exit Function
     Else: Workbooks.Open Filename:=BukuYangDibuka
     End If
