@@ -1,3 +1,17 @@
+Function Pilih_Buku(ByVal LokasiBerkas As String)
+    'Fungsi ini agar pengguna dapat membuka buku excel yang ada dalam lokasi berkas 
+    
+    Dim BukuYangDibuka As String: ChDir LokasiBerkas
+    BukuYangDibuka = Application.GetOpenFilename(Title:="Pilih nama buku yang ingin dibuka", _
+    FileFilter:="Excel Files .xls (.xls),")
+    
+    If BukuYangDibuka = False Then
+        MsgBox "Tidak ada buku yang dibuka.", vbExclamation, "Tidak ada!": Exit Function
+    Else: Workbooks.Open Filename:=BukuYangDibuka
+    End If
+
+End Function
+
 Function TarikKePojokKiriAtas(ByVal KataKunci As String)
 'Fungsi ini bertujuan untuk menarik lokasi kata kunci dan seluruh sisanya ke kiri atas.
     If CariKata(KataKunci) Then
