@@ -1,6 +1,6 @@
 Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
 
-Private Function CariSilangTabel(ByVal ApaYangDicari As String, ByVal BalikinKolomMana As Integer, ByRef TabelDataJagged2 As Variant) As String
+Function CariSilangTabel(ByVal ApaYangDicari As String, ByVal BalikinKolomMana As Integer, ByRef TabelDataJagged2 As Variant) As String
     NilaiDicari = ApaYangDicari
     KembalikanKolomKe = BalikinKolomMana
     TabelData = TabelDataJagged2 
