@@ -1,5 +1,23 @@
 Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
 
+Private Function CariSilangTabel(ByVal ApaYangDicari As String, ByVal BalikinKolomMana As Integer, ByRef TabelDataJagged2 As Variant) As String
+    NilaiDicari = ApaYangDicari
+    KembalikanKolomKe = BalikinKolomMana
+    TabelData = TabelDataJagged2 
+    
+    For i = 1 To UBound(TabelData)
+        If TabelData(i)(0) = NilaiDicari Then
+            Hasil = TabelData(i)(KembalikanKolomKe)
+            GoTo Keluar
+        End If
+    Next
+    
+    Exit Function
+    
+Keluar:
+    CariSilangTabel = Hasil: 'Debug.Print Hasil
+End Function
+    
 Function ApakahSudahDiKinikan(ByVal NamLokBarang As String, ByVal DurasiHari As Double) As Boolean
     Set Sistem = New FileSystemObject: Set Barang = Sistem.GetFile(NamLokBarang)
     If (Now - Barang.DateLastModified) < DurasiHari Then ApakahSudahDiKinikan = True Else ApakahSudahDiKinikan = False
