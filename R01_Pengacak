@@ -1,0 +1,140 @@
+Function BarisAcakKapitalAngka(ByVal PanjangKataMin10 As Integer, ByVal JumlahBarisan As Integer)
+
+    On Error GoTo Galat
+
+    JumlahKapitalAngka = PanjangKataMin10
+    
+    JumlahBarisAcak = JumlahBarisan
+    JumlangPengacakanUlangMaks = 2000
+    
+    KapitalAngka = Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", _
+        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", _
+        "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", _
+        "U", "V", "W", "X", "Y", "Z")
+    
+    ReDim X_Hasil(JumlahBarisAcak)
+    For i = 0 To UBound(X_Hasil)
+        Randomize: Acak = BuatAcakKapitalAngka(JumlahKapitalAngka)
+        Valid = False: Ulang = 0
+        Do Until Valid
+            Valid = True
+            For j = 0 To i
+                If i <> 0 And j <> i Then
+                    If InStr(Acak, Left(X_Hasil(j), Len(X_Hasil(j)) - 3)) > 0 Then
+                        Valid = False: Randomize: Acak = BuatAcakKapitalAngka(JumlahKapitalAngka)
+                        Exit For
+                    End If
+                End If
+            Next j
+            For k = 0 To UBound(KapitalAngka)
+                Uji_Ulang2 = ""
+                Do Until Len(Uji_Ulang2) = JumlahBarisan - 3: Uji_Ulang2 = Uji_Ulang2 & KapitalAngka(k): Loop
+                If InStr(Acak, Uji_Ulang2) > 0 Then
+                    Valid = False: Randomize: Acak = BuatAcakKapitalAngka(JumlahKapitalAngka)
+                    Exit For
+                End If
+            Next k
+            If Ulang = 200 Then Stop
+            Ulang = Ulang + 1: If Ulang > JumlangPengacakanUlangMaks Then GoTo Ulang_Galat
+        Loop
+        Debug.Print Acak
+        X_Hasil(i) = Acak
+    Next i
+    
+    BarisAcakKapitalAngka = X_Hasil
+    
+    GoTo Keluar
+Galat:
+    KodeGalat = "KodeGalat = BarisAcakKapitalAngka_" & Err.Description: Catat KodeGalat, "Log_Galat"
+    Debug.Print KodeGalat: Stop
+    Exit Function
+Ulang_Galat:
+    KodeGalat = "KodeGalat = AcakKapitalAngka - Kebanyakan": Catat KodeGalat, "Log_Galat"
+    Debug.Print KodeGalat: Stop
+    Exit Function
+Keluar:
+End Function
+
+Private Function BuatAcakKapitalAngka(ByVal JumlahAcak As Integer)
+
+Dim KodeAcak As String
+Dim AcakHuruf As String
+Dim LokasiAcak As String
+Dim Urutan As Integer
+Dim HasilAcak As String
+
+Urutan = 1
+Randomize
+AcakHuruf = Chr(AngkaAcak(65, 90))
+Randomize
+LokasiAcak = AngkaAcak(1, JumlahAcak)
+
+Do While Len(KodeAcak) <= JumlahAcak
+    Randomize: AcakHuruf = Chr(AngkaAcak(65, 90))
+    Randomize: LakukanAcak = AngkaAcak(2, 9): i = 0
+    Do Until i > LakukanAcak: Randomize: i = i + 1: Loop
+    If AngkaAcak(0, 1) = 1 Then
+        Randomize
+        If Len(KodeAcak) > 3 Then
+            Lok_Acak = AngkaAcak(1, Len(KodeAcak) - 1)
+            KodeAcak = Left(KodeAcak, Lok_Acak) & Chr(AngkaAcak(65, 90)) & Right(KodeAcak, Len(KodeAcak) - Lok_Acak)
+        Else: KodeAcak = KodeAcak & Chr(AngkaAcak(65, 90))
+        End If
+    Else
+        Randomize
+        If Len(KodeAcak) > 3 Then
+            Lok_Acak = AngkaAcak(1, Len(KodeAcak) - 1)
+            KodeAcak = Left(KodeAcak, Lok_Acak) & AngkaAcak(0, 9) & Right(KodeAcak, Len(KodeAcak) - Lok_Acak)
+        Else: KodeAcak = KodeAcak & AngkaAcak(0, 9)
+        End If
+'        KodeAcak = KodeAcak & AngkaAcak(0, 9)
+    End If
+Loop
+
+BuatAcakKapitalAngka = KodeAcak
+
+End Function
+
+Function BuatAHurufAngkaAcak(ByVal JumlahAcak As Integer)
+
+Dim KodeAcak As String
+Dim AcakHuruf As String
+Dim LokasiAcak As String
+Dim Urutan As Integer
+Dim HasilAcak As String
+Dim PilihanAcak As Integer
+
+Urutan = 1
+Randomize
+AcakHuruf = Chr(AngkaAcak(65, 90))
+Randomize
+LokasiAcak = AngkaAcak(1, JumlahAcak)
+    
+Do While Len(KodeAcak) <= JumlahAcak
+    PilihanAcak = AngkaAcak(0, 2)
+    If Urutan <> LokasiAcak Then
+        If PilihanAcak = 0 Then
+            KodeAcak = KodeAcak & Chr(AngkaAcak(65, 90))
+        ElseIf PilihanAcak = 1 Then
+            KodeAcak = KodeAcak & Chr(AngkaAcak(97, 122))
+        ElseIf PilihanAcak = 2 Then
+            KodeAcak = KodeAcak & AngkaAcak(0, 9)
+        End If
+    Else
+        Randomize
+        KodeAcak = KodeAcak & AcakHuruf
+    End If
+Loop
+
+BuatAHurufAngkaAcak = KodeAcak
+
+End Function
+
+Private Function AngkaAcak(ByVal BatasBawah As Integer, ByVal BatasAtas As Integer)
+
+Randomize
+AngkaAcak = Int((BatasAtas - BatasBawah + 1) * Rnd + BatasBawah)
+
+End Function
+
+
