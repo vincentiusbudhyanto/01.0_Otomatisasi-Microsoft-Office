@@ -34,7 +34,6 @@ Function BarisAcakKapitalAngka(ByVal PanjangKataMin10 As Integer, ByVal JumlahBa
                     Exit For
                 End If
             Next k
-            If Ulang = 200 Then Stop
             Ulang = Ulang + 1: If Ulang > JumlangPengacakanUlangMaks Then GoTo Ulang_Galat
         Loop
         Debug.Print Acak
