@@ -1,0 +1,75 @@
+Function Inet_TekanTag(ByRef Inet, ByVal NamaTag As String)
+    
+    Dim InetDok As MSHTML.HTMLDocument: Dim InetDok_El As MSHTML.IHTMLElement
+    Set InetDok = Inet.Document
+    Set InetDok_El = InetDok.getElementsByTagName(NamaTag)(0)
+    InetDok_El.Click
+
+End Function
+
+Function Inet_KirimFormulir(ByRef Inet, ByRef FormulirMasuk As Variant)
+
+    Dim InetDok As MSHTML.HTMLDocument
+    Set InetDok = Inet.Document
+    Set Formulir = InetDok.getElementsByName(FormulirMasuk)(0)
+    Formulir.submit: Inet_TungguSiap Inet
+    
+End Function
+
+Function Inet_KirimNama(ByRef Inet, ByVal IsianNama As Variant)
+    
+    Dim InetDok As MSHTML.HTMLDocument: Dim InetDok_El As MSHTML.IHTMLElement
+    Set InetDok = Inet.Document
+    Set InetDok_El = InetDok.getElementsByName(IsianNama)(0)
+    InetDok_El.Click: Inet_TungguSiap Inet
+    
+End Function
+
+
+Function Inet_IsiNama(ByRef Inet, ByRef IsianNama As Variant)
+    
+    Dim InetDok As MSHTML.HTMLDocument: Dim InetDok_El As MSHTML.IHTMLElement
+    For i = 0 To UBound(IsianNama)
+        Data = vbNullString: Data = Split(IsianNama(i), ":")
+        Set InetDok = Inet.Document
+        Set InetDok_El = InetDok.getElementsByName(Data(0))(0)
+        InetDok_El.Value = Data(1)
+    Next: Inet_TungguSiap Inet
+    Inet_IsiNama = Inet_IsiNama
+    
+End Function
+
+Function Inet_IsiID(ByRef Inet, ByRef IsianID As Variant)
+
+    Dim InetDok As MSHTML.HTMLDocument: Dim InetDok_El As MSHTML.IHTMLElement
+    For i = 0 To UBound(IsianID)
+        Data = vbNullString: Data = Split(IsianID(i), ":")
+        Set InetDok = Inet.Document
+        Set InetDok_El = InetDok.getElementById(Data(0))
+        InetDok_El.Value = Data(1)
+    Next: Inet_TungguSiap Inet
+    Inet_IsiID = True
+    
+End Function
+
+Function Inet_Buka(ByVal AlamatURL As String, ByVal Terlihat As Boolean)
+    
+    On Error GoTo Galat: Dim Inet As New SHDocVw.internetexplorer
+    Inet.Visible = Terlihat: Inet.Navigate AlamatURL: Inet_TungguSiap Inet
+    Set Inet_Buka = Inet
+    Debug.Print "Berhasil membuka: " & Inet.LocationURL
+    
+Exit Function
+Galat:
+    Catatan = "Galat: Inet_Buka": Debug.Print Catatan
+'    Catat Catatan, "Log_Galat"
+End Function
+
+Function Inet_TungguSiap(ByRef Inet)
+    On Error GoTo Galat
+    Do While Inet.ReadyState <> READYSTATE_COMPLETE: Loop
+Exit Function
+Galat:
+    Catatan = "Galat: Inet_Buka": Debug.Print Catatan
+'    Catat Catatan, "Log_Galat"
+End Function
