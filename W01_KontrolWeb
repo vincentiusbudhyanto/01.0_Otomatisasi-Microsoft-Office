@@ -1,3 +1,48 @@
+Private Function BCAx_Masuk()
+    
+    NamaPengguna = "YourBCAUserName"
+    Sandi = "YourBCAPassword"
+    Tujuan = "https://ibank.klikbca.com/authentication.do?value(actions)=logout"
+    FormulirMasuk = "iBankForm"
+    
+    MsgBox "Jangan lupa log-out!", vbOKOnly, "PERHATIAN"
+    Set Inet = Inet_Buka(Tujuan, True)
+    
+    IsianID = Array("user_ID:" & NamaPengguna)
+    Call Inet_IsiID(Inet, IsianID)
+    
+    IsianID = Array("pswd:" & Sandi)
+    Call Inet_IsiID(Inet, IsianID)
+    
+    IsianNama = "value(Submit)"
+    Kirim = Inet_KirimNama(Inet, IsianNama)
+    Inet_TungguSiap Inet
+    
+    Set BCA_Masuk = Inet
+    
+End Function
+
+Private Function MandiriX_Masuk()
+
+    NamaPengguna = "YourMandiriUserName"
+    Sandi = "YourMandiriPassword"
+
+    Tujuan = "https://ib.bankmandiri.co.id/retail/Login.do?action=form"
+    IsianID = Array("userID:" & NamaPengguna)
+    IsianNama = Array("password:" & Sandi)
+    FormulirMasuk = "LoginForm"
+    
+    MsgBox "Jangan lupa log-out!"
+    Set Inet = Inet_Buka(Tujuan, True)
+    Call Inet_IsiID(Inet, IsianID)
+    Call Inet_IsiNama(Inet, IsianNama)
+    Call Inet_KirimFormulir(Inet, FormulirMasuk)
+    Inet_TungguSiap Inet
+    
+    Set Mandiri_Masuk = Inet
+    
+End Function
+
 Function Inet_TekanTag(ByRef Inet, ByVal NamaTag As String)
     
     Dim InetDok As MSHTML.HTMLDocument: Dim InetDok_El As MSHTML.IHTMLElement
